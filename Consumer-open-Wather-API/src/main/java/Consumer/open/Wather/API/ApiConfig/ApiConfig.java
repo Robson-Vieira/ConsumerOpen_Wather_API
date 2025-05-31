@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApiConfig {
 
     @Bean
-    public RestTemplate resteTemplate(){
+    public RestTemplate restTemplate(){
         return new RestTemplate();
     }
 }
