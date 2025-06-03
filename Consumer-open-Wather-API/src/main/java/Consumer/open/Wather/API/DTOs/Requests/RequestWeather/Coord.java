@@ -9,9 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 public class Coord {
 
-
     private Integer lon;
-
     private Integer lat;
 
 }

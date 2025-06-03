@@ -7,8 +7,8 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 public class WeatherResquestDTO {
-    private String lat;
-    private String lon;
+    private Double lat;
+    private Double lon;
 
 
 }

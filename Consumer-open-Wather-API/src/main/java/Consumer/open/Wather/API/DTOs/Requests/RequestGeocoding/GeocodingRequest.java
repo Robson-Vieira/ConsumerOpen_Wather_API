@@ -15,12 +15,5 @@ public class GeocodingRequest {
     private String country;
     private String state;
 
-    public GeocodingRequest(String name, String country, String state){
-        this.name= name;
-        this.country=country;
-        this.state=state;
-
-    }
-
 
 }

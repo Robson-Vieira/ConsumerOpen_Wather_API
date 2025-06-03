@@ -2,7 +2,7 @@ package Consumer.open.Wather.API.Services;
 
 import Consumer.open.Wather.API.DTOs.Requests.RequestWeather.BodyJson;
 import Consumer.open.Wather.API.DTOs.Requests.RequestWeather.WeatherResquestDTO;
-import Consumer.open.Wather.API.DTOs.Responses.ResponseWeather.*;
+import Consumer.open.Wather.API.DTOs.ResponseWeather.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

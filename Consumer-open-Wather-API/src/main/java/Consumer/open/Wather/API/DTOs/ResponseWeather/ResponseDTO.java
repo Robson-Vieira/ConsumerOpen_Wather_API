@@ -1,4 +1,4 @@
-package Consumer.open.Wather.API.DTOs.Responses.ResponseWeather;
+package Consumer.open.Wather.API.DTOs.ResponseWeather;
 
 import lombok.*;
 

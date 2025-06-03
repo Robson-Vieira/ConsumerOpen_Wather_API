@@ -1,8 +1,10 @@
 package Consumer.open.Wather.API.Services;
 
-import Consumer.open.Wather.API.ApiConfig.ApiConfig;
+import Consumer.open.Wather.API.Config.ApiConfig;
 import Consumer.open.Wather.API.DTOs.Requests.RequestGeocoding.GeocodingRequest;
-import Consumer.open.Wather.API.DTOs.Responses.ResponseGeocoding.GeocodingResponse;
+import Consumer.open.Wather.API.DTOs.Requests.RequestWeather.WeatherResquestDTO;
+
+import Consumer.open.Wather.API.DTOs.ResponseWeather.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,24 +17,26 @@ public class ConsumerGeocodingService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public List<GeocodingResponse> convertCoord(GeocodingRequest request) {
+    @Autowired
+    private ConsumerWeatherService service;
+
+    @Autowired
+    private ApiConfig config;
+
+    public ResponseDTO convertCoord(String cidade, String estado, String pais) {
         String url = "http://api.openweathermap.org/geo/1.0/direct?q="
-                +request.getName()+","+request.getState()+","+request.getCountry()+
-                "&limit=2&appid=286e71ebe6577b0735e65f5e043aa80c";
-        GeocodingResponse[] citys = restTemplate.getForObject(url,GeocodingResponse[].class);
-        List<GeocodingResponse> result = List.of(citys);
-        return result;
+                +cidade+","
+                +estado+","
+                +pais +
+                "&limit=1"
+                + "&appid=" +config.getApikey();
+        GeocodingRequest[] result = restTemplate.getForObject(url, GeocodingRequest[].class);
+        List<GeocodingRequest> list = List.of(result);
+        WeatherResquestDTO weatherResquest = new WeatherResquestDTO(list.get(0).getLat(), list.get(0).getLon());
+        ResponseDTO response = service.findInfO( weatherResquest);
+
+        return response;
 
     }
-    public List<GeocodingResponse> parseGeocodingResponse(List<GeocodingRequest> lista){
-        return lista.stream()
-                .map(l -> new GeocodingResponse(
-                l.getName(),
-                l.getLat(),
-                l.getLon(),
-                l.getState(),
-                l.getCountry()
-        ))
-                .toList();
-    }
+
 }
